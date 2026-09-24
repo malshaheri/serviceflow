@@ -1,0 +1,500 @@
+.appShell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 260px 1fr;
+}
+
+.sidebar {
+  min-height: 100vh;
+  padding: 28px 20px;
+  background: #111827;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 8px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brandMark {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: #ffffff;
+  color: #111827;
+  font-weight: 800;
+}
+
+.brand div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand strong {
+  font-size: 17px;
+}
+
+.brand span {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 30px;
+}
+
+.navigation a,
+.sidebarFooter a {
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: #aeb8c8;
+  font-size: 14px;
+  font-weight: 500;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.navigation a:hover,
+.sidebarFooter a:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+}
+
+.navigation a.active {
+  background: #ffffff;
+  color: #111827;
+  font-weight: 600;
+}
+
+.sidebarFooter {
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebarFooter a {
+  display: block;
+}
+
+.mainContent {
+  min-width: 0;
+  padding: 36px 42px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.topbar p {
+  margin: 0 0 5px;
+  color: #7b8495;
+  font-size: 14px;
+}
+
+.topbar h1 {
+  margin: 0;
+  color: #111827;
+  font-size: 30px;
+  letter-spacing: -0.03em;
+}
+
+.topbar button {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 18px;
+  background: #111827;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(17, 24, 39, 0.12);
+}
+
+.topbar button:hover {
+  background: #263244;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.statCard {
+  min-height: 150px;
+  padding: 20px 22px;
+  background: #ffffff;
+  border: 1px solid #e7e9ef;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(17, 24, 39, 0.04);
+
+  display: grid;
+  grid-template-rows: 38px 38px auto;
+  align-content: start;
+}
+
+.statCard span {
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  color: #687386;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  justify-content: center;
+}
+
+.statCard strong {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: #111827;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.statCard small {
+  padding-top: 8px;
+  color: #98a1b1;
+  font-size: 12px;
+  line-height: 1.6;
+  justify-content: center;
+}
+
+.topbarActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.languageSwitcher {
+  display: flex;
+  padding: 3px;
+  border: 1px solid #e2e5eb;
+  border-radius: 9px;
+  background: #ffffff;
+}
+
+.languageSwitcher button {
+  border: 0;
+  border-radius: 6px;
+  padding: 7px 9px;
+  background: transparent;
+  color: #7b8495;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.languageSwitcher button.active {
+  background: #111827;
+  color: #ffffff;
+}
+
+.newRequestButton {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 18px;
+  background: #111827;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.requestsPanel {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e7e9ef;
+  border-radius: 16px;
+  box-shadow: 0 3px 12px rgba(17, 24, 39, 0.04);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 26px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.panelHeader h2 {
+  margin: 0 0 6px;
+  color: #111827;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+
+.panelHeader p {
+  margin: 0;
+  color: #7b8495;
+  font-size: 13px;
+}
+
+.viewAllButton {
+  border: 1px solid #e1e5eb;
+  border-radius: 9px;
+  padding: 8px 12px;
+  background: #ffffff;
+  color: #394150;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.viewAllButton:hover {
+  background: #f7f8fa;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.requestsTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  table-layout: fixed;
+}
+
+.requestsTable th {
+  padding: 13px 26px;
+  background: #fafbfc;
+  color: #7b8495;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.requestsTable td {
+  padding: 17px 18px;
+  border-top: 1px solid #f0f2f5;
+  color: #394150;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.requestsTable td:first-child {
+  color: #111827;
+  font-weight: 700;
+}
+
+.requestsTable tbody tr:hover {
+  background: #fafbfc;
+}
+.requestsTable td:nth-child(2) {
+  color: #111827;
+  font-weight: 600;
+}
+
+.requestsTable td:nth-child(3) {
+  color: #64748b;
+}
+
+.requestsTable td:nth-child(4) {
+  color: #315ea8;
+  font-weight: 500;
+}
+
+.requestsTable td.noTechnician {
+  text-align: center;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.status.scheduled {
+  background: #eef4ff;
+  color: #315ea8;
+}
+
+.status.progress {
+  background: #fff5e6;
+  color: #9a5b13;
+}
+
+.status.completed {
+  background: #ecf8f1;
+  color: #287a4b;
+}
+
+.status.new {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  width: 100%;
+  max-width: 520px;
+  background: #ffffff;
+  border: 1px solid #e7e9ef;
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 26px;
+}
+
+.modalHeader h2 {
+  margin: 0 0 6px;
+  color: #111827;
+  font-size: 20px;
+}
+
+.modalHeader p {
+  margin: 0;
+  color: #7b8495;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.modalCloseButton {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid #e1e5eb;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #687386;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modalCloseButton:hover {
+  background: #f7f8fa;
+  color: #111827;
+}
+
+.requestForm {
+  padding: 22px 26px 26px;
+  border-top: 1px solid #edf0f4;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formField label {
+  color: #394150;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.formField input,
+.formField select {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border: 1px solid #dfe3e8;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #111827;
+  outline: none;
+}
+
+.formField input:focus {
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.15);
+}
+
+.formField input::placeholder {
+  color: #a0a8b5;
+}
+
+.formError {
+  color: #b42318;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.submitRequestButton {
+  width: 100%;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 18px;
+  background: #111827;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submitRequestButton:hover {
+  background: #263244;
+}
+
+@media (max-width: 800px) {
+  .appShell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    min-height: auto;
+  }
+
+  .mainContent {
+    padding: 28px 20px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
