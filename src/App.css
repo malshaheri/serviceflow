@@ -477,6 +477,235 @@
   background: #263244;
 }
 
+/* =========================
+   Customers Page
+   ========================= */
+
+.customersPage {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Page header */
+
+.pageSectionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.pageSectionHeader h2 {
+  margin: 0 0 6px;
+  color: #111827;
+  font-size: 20px;
+}
+
+.pageSectionHeader p {
+  margin: 0;
+  color: #7b8495;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Add customer button */
+
+.addCustomerButton {
+  flex-shrink: 0;
+  border: 1px solid #dfe3e8;
+  border-radius: 9px;
+  padding: 10px 16px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.addCustomerButton:hover {
+  background: #f7f8fa;
+}
+
+/* Search + filter */
+
+.customerToolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.customerSearch {
+  width: min(360px, 100%);
+  height: 42px;
+  padding: 0 13px;
+  border: 1px solid #dfe3e8;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #111827;
+  outline: none;
+}
+
+.customerSearch::placeholder {
+  color: #a0a8b5;
+}
+
+.customerFilter {
+  height: 42px;
+  min-width: 150px;
+  padding: 0 34px 0 12px;
+  border: 1px solid #dfe3e8;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #394150;
+  outline: none;
+  cursor: pointer;
+}
+
+.customerSearch:focus,
+.customerFilter:focus {
+  border-color: #94a3b8;
+  box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.15);
+}
+
+/* Customer table container */
+
+.customersPanel {
+  margin-top: 0;
+}
+
+/*
+  Dashboard uses table-layout: fixed.
+  Customers needs flexible columns because contact information
+  is wider than the other fields.
+*/
+
+.customersTable {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.customersTable th,
+.customersTable td {
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+/* Column proportions */
+
+.customersTable th:nth-child(1) {
+  width: 21%;
+}
+
+.customersTable th:nth-child(2) {
+  width: 31%;
+}
+
+.customersTable th:nth-child(3) {
+  width: 18%;
+}
+
+.customersTable th:nth-child(4) {
+  width: 14%;
+}
+
+.customersTable th:nth-child(5) {
+  width: 16%;
+}
+
+/* Customer name */
+
+.customerName {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.customerName strong {
+  color: #111827;
+  font-size: 13px;
+}
+
+.customerName span {
+  color: #98a1b1;
+  font-size: 11px;
+}
+
+/* Contact information */
+
+.customerContact {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.customerContact span {
+  display: block;
+  max-width: 210px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #394150;
+  font-size: 13px;
+}
+
+.customerContact small {
+  color: #98a1b1;
+  font-size: 11px;
+}
+
+/* Override generic dashboard table column styles */
+
+.customersTable td:nth-child(2),
+.customersTable td:nth-child(3),
+.customersTable td:nth-child(4) {
+  color: #64748b;
+  font-weight: 400;
+}
+
+/* Customer status */
+
+.status.active {
+  background: #ecf8f1;
+  color: #287a4b;
+}
+
+.status.inactive {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+/* Responsive */
+
+@media (max-width: 800px) {
+  .pageSectionHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .addCustomerButton {
+    align-self: flex-start;
+  }
+
+  .customerToolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .customerSearch {
+    width: 100%;
+  }
+
+  .customerFilter {
+    width: 100%;
+  }
+
+  .customersTable {
+    min-width: 680px;
+  }
+}
+
 @media (max-width: 800px) {
   .appShell {
     grid-template-columns: 1fr;

@@ -15,6 +15,48 @@ export const translations = {
       settings: "Settings",
     },
 
+    customers: {
+      title: "Customers",
+      description: "Manage your customers and their service activity.",
+      addCustomer: "+ Add customer",
+      searchPlaceholder: "Search customers...",
+      filters: {
+        all: "All customers",
+        active: "Active",
+        inactive: "Inactive",
+      },
+      columns: {
+        customer: "Customer",
+        contact: "Contact",
+        city: "City",
+        openRequests: "Open Requests",
+        status: "Status",
+      },
+      statuses: {
+        active: "Active",
+        inactive: "Inactive",
+      },
+      newCustomerModal: {
+        title: "New Customer",
+        description: "Add a new customer to your service management.",
+        name: "Name",
+        namePlaceholder: "Customer name",
+        email: "Email",
+        emailPlaceholder: "customer@example.de",
+        phone: "Phone",
+        phonePlaceholder: "+49 621 555 0000",
+        city: "City",
+        cityPlaceholder: "City",
+        status: "Status",
+        statusOptions: {
+          active: "Active",
+          inactive: "Inactive",
+        },
+        create: "Add customer",
+        close: "Close",
+      },
+    },
+
     dashboard: {
       title: "Dashboard",
       newRequest: "+ New request",
@@ -88,6 +130,49 @@ export const translations = {
       schedule: "Terminplan",
       team: "Team",
       settings: "Einstellungen",
+    },
+
+    customers: {
+      title: "Kunden",
+      description: "Verwalten Sie Ihre Kunden und deren Serviceaktivitäten.",
+      addCustomer: "+ Neuer Kunde",
+      searchPlaceholder: "Kunden suchen...",
+      filters: {
+        all: "Alle Kunden",
+        active: "Aktiv",
+        inactive: "Inaktiv",
+      },
+      columns: {
+        customer: "Kunde",
+        contact: "Kontakt",
+        city: "Stadt",
+        openRequests: "Offene Aufträge",
+        status: "Status",
+      },
+      statuses: {
+        active: "Aktiv",
+        inactive: "Inaktiv",
+      },
+      newCustomerModal: {
+        title: "Neuer Kunde",
+        description:
+          "Fügen Sie einen neuen Kunden zur Serviceverwaltung hinzu.",
+        name: "Name",
+        namePlaceholder: "Kundenname",
+        email: "E-Mail",
+        emailPlaceholder: "kunde@example.de",
+        phone: "Telefon",
+        phonePlaceholder: "+49 621 555 0000",
+        city: "Stadt",
+        cityPlaceholder: "Stadt",
+        status: "Status",
+        statusOptions: {
+          active: "Aktiv",
+          inactive: "Inaktiv",
+        },
+        create: "Kunde hinzufügen",
+        close: "Schließen",
+      },
     },
 
     dashboard: {

@@ -10,8 +10,7 @@ import { ServiceRequestsPage } from "./pages/ServiceRequestsPage";
 import { SchedulePage } from "./pages/SchedulePage";
 import { TeamPage } from "./pages/TeamPage";
 import { SettingsPage } from "./pages/SettingsPage";
-import { NavLink, Route, Routes } from "react-router-dom";
-
+import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 function App() {
   const [locale, setLocale] = useState<Locale>("en");
   const [isNewRequestOpen, setIsNewRequestOpen] = useState(false);
@@ -49,6 +48,20 @@ function App() {
     setIsNewRequestOpen(false);
   };
   const t = translations[locale];
+  const location = useLocation();
+
+  const pageTitle =
+    location.pathname === "/customers"
+      ? t.navigation.customers
+      : location.pathname === "/requests"
+        ? t.navigation.requests
+        : location.pathname === "/schedule"
+          ? t.navigation.schedule
+          : location.pathname === "/team"
+            ? t.navigation.team
+            : location.pathname === "/settings"
+              ? t.navigation.settings
+              : t.dashboard.title;
   const formattedDate = new Intl.DateTimeFormat(
     locale === "de" ? "de-DE" : "en-US",
     {
@@ -120,7 +133,7 @@ function App() {
         <header className="topbar">
           <div>
             <p>{formattedDate}</p>
-            <h1>{t.dashboard.title}</h1>{" "}
+            <h1>{pageTitle}</h1>{" "}
           </div>
 
           <div className="topbarActions">
@@ -163,7 +176,10 @@ function App() {
             }
           />
 
-          <Route path="/customers" element={<CustomersPage />} />
+          <Route
+            path="/customers"
+            element={<CustomersPage locale={locale} />}
+          />
 
           <Route path="/requests" element={<ServiceRequestsPage />} />
 
