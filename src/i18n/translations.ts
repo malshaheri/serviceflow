@@ -57,6 +57,36 @@ export const translations = {
       },
     },
 
+    serviceRequests: {
+      title: "Service Requests",
+      description: "Manage and track all customer service requests.",
+      searchPlaceholder: "Search requests...",
+      filters: {
+        all: "All statuses",
+        new: "New",
+        scheduled: "Scheduled",
+        inProgress: "In Progress",
+        completed: "Completed",
+      },
+      columns: {
+        request: "Request",
+        customer: "Customer",
+        service: "Service",
+        technician: "Technician",
+        scheduledFor: "Scheduled For",
+        status: "Status",
+      },
+      statuses: {
+        new: "New",
+        scheduled: "Scheduled",
+        inProgress: "In Progress",
+        completed: "Completed",
+      },
+      notAssigned: "Not assigned",
+      notScheduled: "Not scheduled",
+      noResults: "No service requests found.",
+    },
+
     dashboard: {
       title: "Dashboard",
       newRequest: "+ New request",
@@ -173,6 +203,37 @@ export const translations = {
         create: "Kunde hinzufügen",
         close: "Schließen",
       },
+    },
+
+    serviceRequests: {
+      title: "Serviceaufträge",
+      description:
+        "Verwalten und verfolgen Sie alle Serviceaufträge Ihrer Kunden.",
+      searchPlaceholder: "Serviceaufträge suchen...",
+      filters: {
+        all: "Alle Status",
+        new: "Neu",
+        scheduled: "Geplant",
+        inProgress: "In Bearbeitung",
+        completed: "Abgeschlossen",
+      },
+      columns: {
+        request: "Auftrag",
+        customer: "Kunde",
+        service: "Service",
+        technician: "Techniker",
+        scheduledFor: "Geplant für",
+        status: "Status",
+      },
+      statuses: {
+        new: "Neu",
+        scheduled: "Geplant",
+        inProgress: "In Bearbeitung",
+        completed: "Abgeschlossen",
+      },
+      notAssigned: "Nicht zugewiesen",
+      notScheduled: "Nicht geplant",
+      noResults: "Keine Serviceaufträge gefunden.",
     },
 
     dashboard: {

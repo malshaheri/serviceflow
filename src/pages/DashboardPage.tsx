@@ -1,5 +1,6 @@
 import { translations, type Locale } from "../i18n/translations";
 import type { ServiceRequest } from "../data/serviceRequests";
+import { Link } from "react-router-dom";
 
 type DashboardPageProps = {
   locale: Locale;
@@ -63,9 +64,9 @@ export function DashboardPage({ locale, serviceRequests }: DashboardPageProps) {
             <p>{t.dashboard.recentRequests.description}</p>
           </div>
 
-          <button type="button" className="viewAllButton">
+          <Link to="/requests" className="viewAllButton">
             {t.dashboard.recentRequests.viewAll}
-          </button>
+          </Link>
         </div>
 
         <div className="tableWrapper">

@@ -181,7 +181,15 @@ function App() {
             element={<CustomersPage locale={locale} />}
           />
 
-          <Route path="/requests" element={<ServiceRequestsPage />} />
+          <Route
+            path="/requests"
+            element={
+              <ServiceRequestsPage
+                locale={locale}
+                serviceRequests={serviceRequests}
+              />
+            }
+          />
 
           <Route path="/schedule" element={<SchedulePage />} />
 
