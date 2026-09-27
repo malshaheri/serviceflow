@@ -1,0 +1,3 @@
+export function CustomersPage() {
+  return <div>Customers Page</div>;
+}

@@ -4,6 +4,13 @@ import "./App.css";
 import { serviceRequests as initialServiceRequests } from "./data/serviceRequests";
 import { NewRequestModal } from "./components/NewRequestModal";
 import { services } from "./data/services";
+import { DashboardPage } from "./pages/DashboardPage";
+import { CustomersPage } from "./pages/CustomersPage";
+import { ServiceRequestsPage } from "./pages/ServiceRequestsPage";
+import { SchedulePage } from "./pages/SchedulePage";
+import { TeamPage } from "./pages/TeamPage";
+import { SettingsPage } from "./pages/SettingsPage";
+import { NavLink, Route, Routes } from "react-router-dom";
 
 function App() {
   const [locale, setLocale] = useState<Locale>("en");
@@ -42,11 +49,6 @@ function App() {
     setIsNewRequestOpen(false);
   };
   const t = translations[locale];
-  const openRequests = serviceRequests.filter(
-    (request) => request.status !== "completed",
-  ).length;
-
-  const today = new Date().toLocaleDateString("en-CA");
   const formattedDate = new Intl.DateTimeFormat(
     locale === "de" ? "de-DE" : "en-US",
     {
@@ -55,18 +57,6 @@ function App() {
       day: "numeric",
     },
   ).format(new Date());
-  const scheduledToday = serviceRequests.filter(
-    (request) =>
-      request.status === "scheduled" && request.scheduledFor?.startsWith(today),
-  ).length;
-
-  const inProgress = serviceRequests.filter(
-    (request) => request.status === "in-progress",
-  ).length;
-
-  const completed = serviceRequests.filter(
-    (request) => request.status === "completed",
-  ).length;
 
   return (
     <div className="appShell">
@@ -81,17 +71,48 @@ function App() {
         </div>
 
         <nav className="navigation">
-          <a className="active" href="#">
+          <NavLink
+            to="/"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
             {t.navigation.dashboard}
-          </a>
-          <a href="#">{t.navigation.customers}</a>
-          <a href="#">{t.navigation.requests}</a>
-          <a href="#">{t.navigation.schedule}</a>
-          <a href="#">{t.navigation.team}</a>
+          </NavLink>
+          <NavLink
+            to="/customers"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            {t.navigation.customers}
+          </NavLink>
+
+          <NavLink
+            to="/requests"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            {t.navigation.requests}
+          </NavLink>
+
+          <NavLink
+            to="/schedule"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            {t.navigation.schedule}
+          </NavLink>
+
+          <NavLink
+            to="/team"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            {t.navigation.team}
+          </NavLink>
         </nav>
 
         <div className="sidebarFooter">
-          <a href="#">{t.navigation.settings}</a>
+          <NavLink
+            to="/settings"
+            className={({ isActive }) => (isActive ? "active" : "")}
+          >
+            {t.navigation.settings}
+          </NavLink>
         </div>
       </aside>
 
@@ -131,95 +152,27 @@ function App() {
           </div>
         </header>
 
-        <section className="dashboard">
-          <div className="statsGrid">
-            <article className="statCard">
-              <span>{t.dashboard.stats.openRequests}</span>
-              <strong>{openRequests}</strong>
-              <small>{t.dashboard.stats.openRequestsDetail}</small>
-            </article>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <DashboardPage
+                locale={locale}
+                serviceRequests={serviceRequests}
+              />
+            }
+          />
 
-            <article className="statCard">
-              <span>{t.dashboard.stats.scheduledToday}</span>
-              <strong>{scheduledToday}</strong>
-              <small>{t.dashboard.stats.scheduledTodayDetail}</small>
-            </article>
+          <Route path="/customers" element={<CustomersPage />} />
 
-            <article className="statCard">
-              <span>{t.dashboard.stats.inProgress}</span>
-              <strong>{inProgress}</strong>
-              <small>{t.dashboard.stats.inProgressDetail}</small>
-            </article>
+          <Route path="/requests" element={<ServiceRequestsPage />} />
 
-            <article className="statCard">
-              <span>{t.dashboard.stats.completed}</span>
-              <strong>{completed}</strong>
-              <small>{t.dashboard.stats.completedDetail}</small>
-            </article>
-          </div>
-          <div className="requestsPanel">
-            <div className="panelHeader">
-              <div>
-                <h2>{t.dashboard.recentRequests.title}</h2>
-                <p>{t.dashboard.recentRequests.description}</p>
-              </div>
+          <Route path="/schedule" element={<SchedulePage />} />
 
-              <button type="button" className="viewAllButton">
-                {t.dashboard.recentRequests.viewAll}
-              </button>
-            </div>
+          <Route path="/team" element={<TeamPage />} />
 
-            <div className="tableWrapper">
-              <table className="requestsTable">
-                <thead>
-                  <tr>
-                    <th>{t.dashboard.recentRequests.columns.request}</th>
-                    <th>{t.dashboard.recentRequests.columns.customer}</th>
-                    <th>{t.dashboard.recentRequests.columns.service}</th>
-                    <th>{t.dashboard.recentRequests.columns.technician}</th>
-                    <th>{t.dashboard.recentRequests.columns.status}</th>
-                  </tr>
-                </thead>
-
-                <tbody>
-                  {serviceRequests.slice(0, 4).map((request) => {
-                    const statusLabel =
-                      request.status === "scheduled"
-                        ? t.dashboard.recentRequests.statuses.scheduled
-                        : request.status === "in-progress"
-                          ? t.dashboard.recentRequests.statuses.inProgress
-                          : request.status === "completed"
-                            ? t.dashboard.recentRequests.statuses.completed
-                            : t.dashboard.recentRequests.statuses.new;
-
-                    const statusClass =
-                      request.status === "in-progress"
-                        ? "progress"
-                        : request.status;
-
-                    return (
-                      <tr key={request.id}>
-                        <td>#{request.id}</td>
-                        <td>{request.customer}</td>
-                        <td>{request.service[locale]}</td>
-                        <td
-                          className={!request.technician ? "noTechnician" : ""}
-                        >
-                          {request.technician ?? "—"}
-                        </td>
-                        <td>
-                          <span className={`status ${statusClass}`}>
-                            {statusLabel}
-                          </span>
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </section>
+          <Route path="/settings" element={<SettingsPage />} />
+        </Routes>
       </main>
       <NewRequestModal
         isOpen={isNewRequestOpen}
