@@ -1295,6 +1295,378 @@
   }
 }
 
+/* =========================
+   Team Page
+   ========================= */
+
+.teamPage {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+
+/* =========================
+   Summary
+   ========================= */
+
+.teamSummary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.teamSummary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 18px 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.teamSummary strong {
+  color: #111827;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.teamSummary span {
+  color: #7b8495;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* =========================
+   Team Grid
+   ========================= */
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.teamCard {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  overflow: visible;
+}
+
+/* =========================
+   Card Header
+   ========================= */
+
+.teamCardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.teamHeaderTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.teamStatusRow {
+  display: flex;
+  align-items: center;
+}
+
+.teamMenuWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Avatar */
+
+.teamAvatar {
+  display: flex;
+  width: 46px;
+  height: 46px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #eef4ff;
+  color: #2457a7;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* =========================
+   Availability Status
+   ========================= */
+
+.teamStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 8px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.teamStatusDot {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.teamStatus.available {
+  background: #ecf8f1;
+  color: #287a4b;
+}
+
+.teamStatus.busy {
+  background: #fff5e8;
+  color: #a85c13;
+}
+
+.teamStatus.off {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+/* =========================
+   Three-dot Menu
+   ========================= */
+
+.teamMenuButton {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #64748b;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.teamMenuButton:hover {
+  background: #f1f5f9;
+  color: #111827;
+}
+
+.teamMenu {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 6px);
+  right: 0;
+  display: flex;
+  width: 145px;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow:
+    0 12px 28px rgb(15 23 42 / 14%),
+    0 2px 6px rgb(15 23 42 / 6%);
+}
+
+.teamMenu button {
+  width: 100%;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #334155;
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.teamMenu button:hover {
+  background: #f8fafc;
+}
+
+.teamMenu .teamMenuRemove {
+  color: #c24141;
+}
+
+.teamMenu .teamMenuRemove:hover {
+  background: #fff1f1;
+}
+
+/* =========================
+   Member Information
+   ========================= */
+
+.teamMemberInfo {
+  min-height: 66px;
+}
+
+.teamMemberInfo h3 {
+  margin: 0 0 6px;
+  overflow: hidden;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.teamMemberInfo p {
+  margin: 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =========================
+   Workload
+   ========================= */
+
+.teamWorkload {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding: 13px 0;
+  border-top: 1px solid #edf0f3;
+  border-bottom: 1px solid #edf0f3;
+}
+
+.teamWorkload span {
+  color: #7b8495;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.teamWorkload strong {
+  display: flex;
+  width: 28px;
+  height: 28px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #111827;
+  font-size: 12px;
+}
+
+/* =========================
+   Contact
+   ========================= */
+
+.teamContact {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 15px;
+}
+
+.teamContact > span {
+  margin-bottom: 2px;
+  color: #98a1b1;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.teamContact a {
+  display: block;
+  overflow: hidden;
+  color: #475569;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.teamContact a:hover {
+  color: #0f4fa8;
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 900px) {
+  .teamGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 800px) {
+  .teamSummary {
+    grid-template-columns: 1fr;
+  }
+
+  .teamGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .teamCard {
+    padding: 18px;
+  }
+
+  .teamMemberInfo {
+    min-height: 0;
+  }
+}
+
+.modalActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 18px 26px 24px;
+  border-top: 1px solid #edf0f3;
+}
+
+.secondaryButton,
+.dangerButton {
+  min-width: 100px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondaryButton {
+  border: 1px solid #d8dee8;
+  background: #ffffff;
+  color: #475569;
+}
+
+.secondaryButton:hover {
+  background: #f8fafc;
+}
+
+.dangerButton {
+  border: 1px solid #dc2626;
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.dangerButton:hover {
+  background: #b91c1c;
+  border-color: #b91c1c;
+}
+
 @media (max-width: 800px) {
   .appShell {
     grid-template-columns: 1fr;

@@ -198,7 +198,12 @@ function App() {
             }
           />
 
-          <Route path="/team" element={<TeamPage />} />
+          <Route
+            path="/team"
+            element={
+              <TeamPage locale={locale} serviceRequests={serviceRequests} />
+            }
+          />
 
           <Route path="/settings" element={<SettingsPage />} />
         </Routes>

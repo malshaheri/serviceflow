@@ -104,6 +104,56 @@ export const translations = {
       },
     },
 
+    team: {
+      title: "Team",
+      description: "Manage your service team and current workload.",
+      members: "Team Members",
+      openRequests: "Open Requests",
+      contact: "Contact",
+      status: "Status",
+      statuses: {
+        available: "Available",
+        busy: "Busy",
+        off: "Off Duty",
+      },
+      addMember: "+ Add team member",
+      editMember: "Edit",
+      removeMember: "Remove",
+
+      newMemberModal: {
+        title: "Add Team Member",
+        description: "Add a new technician to your service team.",
+        name: "Name",
+        namePlaceholder: "Full name",
+        roleEnglish: "Role (English)",
+        roleEnglishPlaceholder: "e.g. Heating Technician",
+        roleGerman: "Role (German)",
+        roleGermanPlaceholder: "z. B. Heizungstechniker",
+        email: "Email",
+        emailPlaceholder: "name@serviceflow.de",
+        phone: "Phone",
+        phonePlaceholder: "+49 621 555 0000",
+        status: "Status",
+        statusOptions: {
+          available: "Available",
+          busy: "Busy",
+          off: "Off Duty",
+        },
+        create: "Add team member",
+        close: "Close",
+        editTitle: "Edit Team Member",
+        editDescription: "Update the team member's information.",
+        saveChanges: "Save changes",
+      },
+      removeConfirmation: {
+        title: "Remove team member?",
+        message:
+          "Are you sure you want to remove this team member? Existing service requests will not be deleted.",
+        cancel: "Cancel",
+        confirm: "Remove",
+      },
+    },
+
     dashboard: {
       title: "Dashboard",
       newRequest: "+ New request",
@@ -268,6 +318,58 @@ export const translations = {
         scheduled: "Geplant",
         inProgress: "In Bearbeitung",
         completed: "Abgeschlossen",
+      },
+    },
+
+    team: {
+      title: "Team",
+      description: "Verwalten Sie Ihr Serviceteam und die aktuelle Auslastung.",
+      members: "Teammitglieder",
+      openRequests: "Offene Aufträge",
+      contact: "Kontakt",
+      status: "Status",
+      statuses: {
+        available: "Verfügbar",
+        busy: "Beschäftigt",
+        off: "Nicht im Dienst",
+      },
+      addMember: "+ Teammitglied hinzufügen",
+      editMember: "Bearbeiten",
+      removeMember: "Entfernen",
+
+      newMemberModal: {
+        title: "Teammitglied hinzufügen",
+        description:
+          "Fügen Sie einen neuen Techniker zu Ihrem Serviceteam hinzu.",
+        name: "Name",
+        namePlaceholder: "Vollständiger Name",
+        roleEnglish: "Position (Englisch)",
+        roleEnglishPlaceholder: "z. B. Heating Technician",
+        roleGerman: "Position (Deutsch)",
+        roleGermanPlaceholder: "z. B. Heizungstechniker",
+        email: "E-Mail",
+        emailPlaceholder: "name@serviceflow.de",
+        phone: "Telefon",
+        phonePlaceholder: "+49 621 555 0000",
+        status: "Status",
+        statusOptions: {
+          available: "Verfügbar",
+          busy: "Beschäftigt",
+          off: "Nicht im Dienst",
+        },
+        create: "Teammitglied hinzufügen",
+        close: "Schließen",
+        editTitle: "Teammitglied bearbeiten",
+        editDescription:
+          "Aktualisieren Sie die Informationen des Teammitglieds.",
+        saveChanges: "Änderungen speichern",
+      },
+      removeConfirmation: {
+        title: "Teammitglied entfernen?",
+        message:
+          "Möchten Sie dieses Teammitglied wirklich entfernen? Bestehende Serviceaufträge werden nicht gelöscht.",
+        cancel: "Abbrechen",
+        confirm: "Entfernen",
       },
     },
 
