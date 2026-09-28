@@ -154,6 +154,46 @@ export const translations = {
       },
     },
 
+    settings: {
+      title: "Settings",
+      description:
+        "Manage your company information and application preferences.",
+
+      company: {
+        title: "Company Information",
+        description: "Update the business details used across ServiceFlow.",
+        companyName: "Company name",
+        email: "Email",
+        phone: "Phone",
+        address: "Address",
+      },
+
+      preferences: {
+        title: "Preferences",
+        description: "Configure your default application preferences.",
+        defaultLanguage: "Default language",
+        german: "German",
+        english: "English",
+      },
+
+      business: {
+        title: "Business Settings",
+        description: "Configure your standard business hours.",
+        openingTime: "Opening time",
+        closingTime: "Closing time",
+      },
+
+      save: "Save settings",
+      saved: "Settings saved successfully.",
+
+      validation: {
+        companyNameRequired: "Company name is required.",
+        invalidEmail: "Please enter a valid email address.",
+        closingTimeAfterOpening: "Closing time must be after opening time.",
+        checkSettings: "Please check your settings.",
+      },
+    },
+
     dashboard: {
       title: "Dashboard",
       newRequest: "+ New request",
@@ -370,6 +410,49 @@ export const translations = {
           "Möchten Sie dieses Teammitglied wirklich entfernen? Bestehende Serviceaufträge werden nicht gelöscht.",
         cancel: "Abbrechen",
         confirm: "Entfernen",
+      },
+    },
+
+    settings: {
+      title: "Einstellungen",
+      description:
+        "Verwalten Sie Ihre Unternehmensdaten und Anwendungseinstellungen.",
+
+      company: {
+        title: "Unternehmensinformationen",
+        description:
+          "Aktualisieren Sie die in ServiceFlow verwendeten Unternehmensdaten.",
+        companyName: "Unternehmensname",
+        email: "E-Mail",
+        phone: "Telefon",
+        address: "Adresse",
+      },
+
+      preferences: {
+        title: "Einstellungen",
+        description:
+          "Konfigurieren Sie Ihre standardmäßigen Anwendungseinstellungen.",
+        defaultLanguage: "Standardsprache",
+        german: "Deutsch",
+        english: "Englisch",
+      },
+
+      business: {
+        title: "Geschäftseinstellungen",
+        description: "Konfigurieren Sie Ihre regulären Geschäftszeiten.",
+        openingTime: "Öffnungszeit",
+        closingTime: "Schließzeit",
+      },
+
+      save: "Einstellungen speichern",
+      saved: "Einstellungen wurden erfolgreich gespeichert.",
+
+      validation: {
+        companyNameRequired: "Der Unternehmensname ist erforderlich.",
+        invalidEmail: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+        closingTimeAfterOpening:
+          "Die Schließzeit muss nach der Öffnungszeit liegen.",
+        checkSettings: "Bitte überprüfen Sie Ihre Einstellungen.",
       },
     },
 

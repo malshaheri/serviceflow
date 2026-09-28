@@ -12,7 +12,26 @@ import { TeamPage } from "./pages/TeamPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 function App() {
-  const [locale, setLocale] = useState<Locale>("en");
+  const [locale, setLocale] = useState<Locale>(() => {
+    const savedSettings = localStorage.getItem("serviceflow-settings");
+
+    if (savedSettings) {
+      try {
+        const parsedSettings = JSON.parse(savedSettings);
+
+        if (
+          parsedSettings.defaultLanguage === "en" ||
+          parsedSettings.defaultLanguage === "de"
+        ) {
+          return parsedSettings.defaultLanguage;
+        }
+      } catch {
+        // Use English as fallback
+      }
+    }
+
+    return "en";
+  });
   const [isNewRequestOpen, setIsNewRequestOpen] = useState(false);
   const [serviceRequests, setServiceRequests] = useState(
     initialServiceRequests,
@@ -175,12 +194,10 @@ function App() {
               />
             }
           />
-
           <Route
             path="/customers"
             element={<CustomersPage locale={locale} />}
           />
-
           <Route
             path="/requests"
             element={
@@ -190,22 +207,22 @@ function App() {
               />
             }
           />
-
           <Route
             path="/schedule"
             element={
               <SchedulePage locale={locale} serviceRequests={serviceRequests} />
             }
           />
-
           <Route
             path="/team"
             element={
               <TeamPage locale={locale} serviceRequests={serviceRequests} />
             }
           />
-
-          <Route path="/settings" element={<SettingsPage />} />
+          <Route
+            path="/settings"
+            element={<SettingsPage locale={locale} />}
+          />{" "}
         </Routes>
       </main>
       <NewRequestModal
