@@ -1,10 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { translations, type Locale } from "./i18n/translations";
 import "./App.css";
-import {
-  serviceRequests as initialServiceRequests,
-  type ServiceRequest,
-} from "./data/serviceRequests";
 import { NewRequestModal } from "./components/NewRequestModal";
 import { services } from "./data/services";
 import { DashboardPage } from "./pages/DashboardPage";
@@ -14,6 +10,12 @@ import { SchedulePage } from "./pages/SchedulePage";
 import { TeamPage } from "./pages/TeamPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  createServiceRequest,
+  getServiceRequests,
+} from "./api/serviceRequestsApi";
+
 function App() {
   const [locale, setLocale] = useState<Locale>(() => {
     const savedSettings = localStorage.getItem("serviceflow-settings");
@@ -36,29 +38,27 @@ function App() {
     return "en";
   });
   const [isNewRequestOpen, setIsNewRequestOpen] = useState(false);
-  const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>(
-    () => {
-      const savedRequests = localStorage.getItem(
-        "serviceflow-service-requests",
-      );
 
-      if (savedRequests) {
-        try {
-          return JSON.parse(savedRequests);
-        } catch {
-          // Use initial service requests below
-        }
-      }
+  const queryClient = useQueryClient();
 
-      return initialServiceRequests;
+  const {
+    data: serviceRequests = [],
+    isLoading: isServiceRequestsLoading,
+    isError: isServiceRequestsError,
+  } = useQuery({
+    queryKey: ["serviceRequests"],
+    queryFn: getServiceRequests,
+  });
+
+  const createRequestMutation = useMutation({
+    mutationFn: createServiceRequest,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["serviceRequests"],
+      });
     },
-  );
-  useEffect(() => {
-    localStorage.setItem(
-      "serviceflow-service-requests",
-      JSON.stringify(serviceRequests),
-    );
-  }, [serviceRequests]);
+  });
+
   const handleCreateRequest = (data: {
     customer: string;
     service: string;
@@ -85,10 +85,13 @@ function App() {
       scheduledFor: data.scheduledFor || null,
     };
 
-    setServiceRequests((currentRequests) => [newRequest, ...currentRequests]);
-
-    setIsNewRequestOpen(false);
+    createRequestMutation.mutate(newRequest, {
+      onSuccess: () => {
+        setIsNewRequestOpen(false);
+      },
+    });
   };
+
   const t = translations[locale];
   const location = useLocation();
 
@@ -207,46 +210,78 @@ function App() {
           </div>
         </header>
 
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <DashboardPage
-                locale={locale}
-                serviceRequests={serviceRequests}
-              />
-            }
-          />
-          <Route
-            path="/customers"
-            element={<CustomersPage locale={locale} />}
-          />
-          <Route
-            path="/requests"
-            element={
-              <ServiceRequestsPage
-                locale={locale}
-                serviceRequests={serviceRequests}
-              />
-            }
-          />
-          <Route
-            path="/schedule"
-            element={
-              <SchedulePage locale={locale} serviceRequests={serviceRequests} />
-            }
-          />
-          <Route
-            path="/team"
-            element={
-              <TeamPage locale={locale} serviceRequests={serviceRequests} />
-            }
-          />
-          <Route
-            path="/settings"
-            element={<SettingsPage locale={locale} />}
-          />{" "}
-        </Routes>
+        {isServiceRequestsLoading && (
+          <div className="queryState">
+            <div className="querySpinner" />
+            <p>
+              {locale === "de"
+                ? "Serviceanfragen werden geladen..."
+                : "Loading service requests..."}
+            </p>
+          </div>
+        )}
+
+        {isServiceRequestsError && (
+          <div className="queryState queryStateError">
+            <strong>
+              {locale === "de"
+                ? "Serviceanfragen konnten nicht geladen werden."
+                : "Service requests could not be loaded."}
+            </strong>
+
+            <p>
+              {locale === "de"
+                ? "Bitte versuchen Sie es erneut."
+                : "Please try again."}
+            </p>
+          </div>
+        )}
+
+        {!isServiceRequestsLoading && !isServiceRequestsError && (
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <DashboardPage
+                  locale={locale}
+                  serviceRequests={serviceRequests}
+                />
+              }
+            />
+            <Route
+              path="/customers"
+              element={<CustomersPage locale={locale} />}
+            />
+            <Route
+              path="/requests"
+              element={
+                <ServiceRequestsPage
+                  locale={locale}
+                  serviceRequests={serviceRequests}
+                />
+              }
+            />
+            <Route
+              path="/schedule"
+              element={
+                <SchedulePage
+                  locale={locale}
+                  serviceRequests={serviceRequests}
+                />
+              }
+            />
+            <Route
+              path="/team"
+              element={
+                <TeamPage locale={locale} serviceRequests={serviceRequests} />
+              }
+            />
+            <Route
+              path="/settings"
+              element={<SettingsPage locale={locale} />}
+            />{" "}
+          </Routes>
+        )}
       </main>
       <NewRequestModal
         isOpen={isNewRequestOpen}

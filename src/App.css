@@ -1893,6 +1893,56 @@
   }
 }
 
+.queryState {
+  display: flex;
+  min-height: 320px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 40px 24px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #6b7280;
+  text-align: center;
+}
+
+.queryState p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.querySpinner {
+  width: 34px;
+  height: 34px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  animation: querySpin 0.75s linear infinite;
+}
+
+.queryStateError {
+  min-height: 260px;
+  border-color: #fecaca;
+  background: #fffafa;
+}
+
+.queryStateError strong {
+  color: #b91c1c;
+  font-size: 15px;
+}
+
+.queryStateError p {
+  color: #7f1d1d;
+}
+
+@keyframes querySpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 800px) {
   .appShell {
     grid-template-columns: 1fr;
