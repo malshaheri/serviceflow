@@ -86,6 +86,23 @@ export const translations = {
       notScheduled: "Not scheduled",
       noResults: "No service requests found.",
     },
+    schedule: {
+      title: "Schedule",
+      description: "View and manage scheduled service appointments.",
+      previousDay: "Previous day",
+      today: "Today",
+      nextDay: "Next day",
+      appointments: "Appointments",
+      technician: "Technician",
+      notAssigned: "Not assigned",
+      noAppointments: "No appointments scheduled for this day.",
+      statuses: {
+        new: "New",
+        scheduled: "Scheduled",
+        inProgress: "In Progress",
+        completed: "Completed",
+      },
+    },
 
     dashboard: {
       title: "Dashboard",
@@ -234,6 +251,24 @@ export const translations = {
       notAssigned: "Nicht zugewiesen",
       notScheduled: "Nicht geplant",
       noResults: "Keine Serviceaufträge gefunden.",
+    },
+
+    schedule: {
+      title: "Terminplan",
+      description: "Zeigen und verwalten Sie geplante Servicetermine.",
+      previousDay: "Vorheriger Tag",
+      today: "Heute",
+      nextDay: "Nächster Tag",
+      appointments: "Termine",
+      technician: "Techniker",
+      notAssigned: "Nicht zugewiesen",
+      noAppointments: "Für diesen Tag sind keine Termine geplant.",
+      statuses: {
+        new: "Neu",
+        scheduled: "Geplant",
+        inProgress: "In Bearbeitung",
+        completed: "Abgeschlossen",
+      },
     },
 
     dashboard: {

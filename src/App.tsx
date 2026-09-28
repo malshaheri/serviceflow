@@ -191,7 +191,12 @@ function App() {
             }
           />
 
-          <Route path="/schedule" element={<SchedulePage />} />
+          <Route
+            path="/schedule"
+            element={
+              <SchedulePage locale={locale} serviceRequests={serviceRequests} />
+            }
+          />
 
           <Route path="/team" element={<TeamPage />} />
 

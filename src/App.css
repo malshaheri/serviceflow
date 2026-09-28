@@ -1011,6 +1011,290 @@
   }
 }
 
+/* =========================
+   Schedule Page
+   ========================= */
+
+.schedulePage {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+
+/* Date navigation */
+
+.scheduleNavigation {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.scheduleDate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  min-width: 260px;
+  text-align: center;
+}
+
+.scheduleDate strong {
+  color: #111827;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.scheduleDate span {
+  color: #8a94a5;
+  font-size: 12px;
+}
+
+.scheduleNavButton,
+.scheduleTodayButton {
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #394150;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.scheduleNavButton:hover,
+.scheduleTodayButton:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.scheduleNavigation > .scheduleNavButton:first-child {
+  justify-self: start;
+}
+
+.scheduleNavigationActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.scheduleTodayButton {
+  color: #0f4fa8;
+  border-color: #cbdcf5;
+  background: #f7faff;
+}
+
+/* Appointment list */
+
+.scheduleList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scheduleAppointment {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  min-height: 108px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.appointmentTime {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 12px;
+  border-right: 1px solid #edf0f3;
+  background: #f8fafc;
+  color: #111827;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.appointmentContent {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px 120px;
+  align-items: center;
+  gap: 24px;
+  min-width: 0;
+  padding: 18px 22px;
+}
+
+.appointmentMain {
+  min-width: 0;
+}
+
+.appointmentRequestId {
+  display: block;
+  margin-bottom: 5px;
+  color: #98a1b1;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.appointmentMain h3 {
+  margin: 0 0 5px;
+  overflow: hidden;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.appointmentMain p {
+  margin: 0;
+  overflow: hidden;
+  color: #64748b;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Technician + status */
+
+.appointmentMeta {
+  display: contents;
+}
+
+.appointmentMeta > .status {
+  justify-self: end;
+}
+
+.appointmentMeta > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 130px;
+}
+
+.appointmentMeta > div > span {
+  color: #98a1b1;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.appointmentMeta > div > strong {
+  color: #394150;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Empty day */
+
+.scheduleEmptyState {
+  display: flex;
+  min-height: 190px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  border: 1px dashed #d8dee7;
+  border-radius: 12px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.scheduleEmptyState strong {
+  margin-bottom: 7px;
+  color: #394150;
+  font-size: 14px;
+}
+
+.scheduleEmptyState p {
+  margin: 0;
+  color: #8a94a5;
+  font-size: 13px;
+}
+
+/* Tablet */
+
+@media (max-width: 1000px) {
+  .scheduleNavigation {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .scheduleDate {
+    min-width: 0;
+  }
+
+  .appointmentContent {
+    gap: 18px;
+  }
+
+  .appointmentMeta {
+    gap: 16px;
+  }
+
+  .appointmentMeta > div {
+    min-width: 110px;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 800px) {
+  .scheduleNavigation {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .scheduleDate {
+    order: -1;
+    padding-bottom: 4px;
+  }
+
+  .scheduleNavigation > .scheduleNavButton:first-child {
+    width: 100%;
+  }
+
+  .scheduleNavigationActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .scheduleNavButton,
+  .scheduleTodayButton {
+    width: 100%;
+  }
+
+  .scheduleAppointment {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+
+  .appointmentTime {
+    padding: 14px 8px;
+    font-size: 14px;
+  }
+
+  .appointmentContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .appointmentMeta {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
 @media (max-width: 800px) {
   .appShell {
     grid-template-columns: 1fr;
