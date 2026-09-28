@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { translations, type Locale } from "./i18n/translations";
 import "./App.css";
-import { serviceRequests as initialServiceRequests } from "./data/serviceRequests";
+import {
+  serviceRequests as initialServiceRequests,
+  type ServiceRequest,
+} from "./data/serviceRequests";
 import { NewRequestModal } from "./components/NewRequestModal";
 import { services } from "./data/services";
 import { DashboardPage } from "./pages/DashboardPage";
@@ -33,9 +36,29 @@ function App() {
     return "en";
   });
   const [isNewRequestOpen, setIsNewRequestOpen] = useState(false);
-  const [serviceRequests, setServiceRequests] = useState(
-    initialServiceRequests,
+  const [serviceRequests, setServiceRequests] = useState<ServiceRequest[]>(
+    () => {
+      const savedRequests = localStorage.getItem(
+        "serviceflow-service-requests",
+      );
+
+      if (savedRequests) {
+        try {
+          return JSON.parse(savedRequests);
+        } catch {
+          // Use initial service requests below
+        }
+      }
+
+      return initialServiceRequests;
+    },
   );
+  useEffect(() => {
+    localStorage.setItem(
+      "serviceflow-service-requests",
+      JSON.stringify(serviceRequests),
+    );
+  }, [serviceRequests]);
   const handleCreateRequest = (data: {
     customer: string;
     service: string;

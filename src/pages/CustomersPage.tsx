@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   customers as initialCustomers,
   type Customer,
@@ -16,7 +16,22 @@ type CustomersPageProps = {
 type StatusFilter = "all" | "active" | "inactive";
 
 export function CustomersPage({ locale }: CustomersPageProps) {
-  const [customers, setCustomers] = useState<Customer[]>(initialCustomers);
+  const [customers, setCustomers] = useState<Customer[]>(() => {
+    const savedCustomers = localStorage.getItem("serviceflow-customers");
+
+    if (savedCustomers) {
+      try {
+        return JSON.parse(savedCustomers);
+      } catch {
+        // Use initial customers below
+      }
+    }
+
+    return initialCustomers;
+  });
+  useEffect(() => {
+    localStorage.setItem("serviceflow-customers", JSON.stringify(customers));
+  }, [customers]);
 
   const [isNewCustomerOpen, setIsNewCustomerOpen] = useState(false);
   const [search, setSearch] = useState("");
