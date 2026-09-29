@@ -1,8 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import {
-  customers as initialCustomers,
-  type Customer,
-} from "../data/customers";
+import { useMemo, useState } from "react";
+import type { Customer } from "../data/customers";
 import {
   NewCustomerModal,
   type CustomerFormData,
@@ -11,48 +8,25 @@ import { translations, type Locale } from "../i18n/translations";
 
 type CustomersPageProps = {
   locale: Locale;
+  customers: Customer[];
+  onCreateCustomer: (data: CustomerFormData) => void;
 };
 
 type StatusFilter = "all" | "active" | "inactive";
 
-export function CustomersPage({ locale }: CustomersPageProps) {
-  const [customers, setCustomers] = useState<Customer[]>(() => {
-    const savedCustomers = localStorage.getItem("serviceflow-customers");
-
-    if (savedCustomers) {
-      try {
-        return JSON.parse(savedCustomers);
-      } catch {
-        // Use initial customers below
-      }
-    }
-
-    return initialCustomers;
-  });
-  useEffect(() => {
-    localStorage.setItem("serviceflow-customers", JSON.stringify(customers));
-  }, [customers]);
-
+export function CustomersPage({
+  locale,
+  customers,
+  onCreateCustomer,
+}: CustomersPageProps) {
   const [isNewCustomerOpen, setIsNewCustomerOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
 
   const t = translations[locale].customers;
+
   const handleCreateCustomer = (data: CustomerFormData) => {
-    const nextId = Math.max(...customers.map((customer) => customer.id)) + 1;
-
-    const newCustomer: Customer = {
-      id: nextId,
-      name: data.name,
-      email: data.email,
-      phone: data.phone,
-      city: data.city,
-      status: data.status,
-      openRequests: 0,
-    };
-
-    setCustomers((currentCustomers) => [newCustomer, ...currentCustomers]);
-
+    onCreateCustomer(data);
     setIsNewCustomerOpen(false);
   };
 

@@ -15,6 +15,7 @@ import {
   createServiceRequest,
   getServiceRequests,
 } from "./api/serviceRequestsApi";
+import { createCustomer, getCustomers } from "./api/customersApi";
 
 function App() {
   const [locale, setLocale] = useState<Locale>(() => {
@@ -48,6 +49,15 @@ function App() {
   } = useQuery({
     queryKey: ["serviceRequests"],
     queryFn: getServiceRequests,
+  });
+
+  const createCustomerMutation = useMutation({
+    mutationFn: createCustomer,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["customers"],
+      });
+    },
   });
 
   const createRequestMutation = useMutation({
@@ -90,6 +100,33 @@ function App() {
         setIsNewRequestOpen(false);
       },
     });
+  };
+
+  const { data: customers = [] } = useQuery({
+    queryKey: ["customers"],
+    queryFn: getCustomers,
+  });
+
+  const handleCreateCustomer = (data: {
+    name: string;
+    email: string;
+    phone: string;
+    city: string;
+    status: "active" | "inactive";
+  }) => {
+    const nextId = Math.max(...customers.map((customer) => customer.id)) + 1;
+
+    const newCustomer = {
+      id: nextId,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      city: data.city,
+      status: data.status,
+      openRequests: 0,
+    };
+
+    createCustomerMutation.mutate(newCustomer);
   };
 
   const t = translations[locale];
@@ -250,7 +287,13 @@ function App() {
             />
             <Route
               path="/customers"
-              element={<CustomersPage locale={locale} />}
+              element={
+                <CustomersPage
+                  locale={locale}
+                  customers={customers}
+                  onCreateCustomer={handleCreateCustomer}
+                />
+              }
             />
             <Route
               path="/requests"
