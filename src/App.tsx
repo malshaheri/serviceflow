@@ -24,6 +24,11 @@ import {
   getTeamMembers,
   updateTeamMember,
 } from "./api/teamMembersApi";
+import {
+  getSettings,
+  updateSettings,
+  type Settings,
+} from "./api/settingsApi";
 
 function App() {
   const [locale, setLocale] = useState<Locale>(() => {
@@ -95,6 +100,15 @@ function App() {
     },
   });
 
+  const updateSettingsMutation = useMutation({
+    mutationFn: updateSettings,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["settings"],
+      });
+    },
+  });
+
   const createRequestMutation = useMutation({
     mutationFn: createServiceRequest,
     onSuccess: () => {
@@ -147,6 +161,11 @@ function App() {
     queryFn: getTeamMembers,
   });
 
+  const { data: settings } = useQuery({
+    queryKey: ["settings"],
+    queryFn: getSettings,
+  });
+
   const handleCreateCustomer = (data: {
     name: string;
     email: string;
@@ -194,6 +213,10 @@ function App() {
 
   const handleDeleteTeamMember = (memberId: number) => {
     deleteTeamMemberMutation.mutate(memberId);
+  };
+
+  const handleUpdateSettings = (updatedSettings: Settings) => {
+    updateSettingsMutation.mutate(updatedSettings);
   };
 
   const t = translations[locale];
@@ -395,7 +418,15 @@ function App() {
             />
             <Route
               path="/settings"
-              element={<SettingsPage locale={locale} />}
+              element={
+                settings ? (
+                  <SettingsPage
+                    locale={locale}
+                    settings={settings}
+                    onUpdateSettings={handleUpdateSettings}
+                  />
+                ) : null
+              }
             />{" "}
           </Routes>
         )}
@@ -411,6 +442,11 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
 
 
 

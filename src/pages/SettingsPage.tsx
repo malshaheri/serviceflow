@@ -1,9 +1,12 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { translations, type Locale } from "../i18n/translations";
 import { z } from "zod";
+import type { Settings } from "../api/settingsApi";
 
 type SettingsPageProps = {
   locale: Locale;
+  settings: Settings;
+  onUpdateSettings: (settings: Settings) => void;
 };
 
 type SettingsValidation = {
@@ -17,14 +20,10 @@ const createSettingsSchema = (validation: SettingsValidation) =>
   z
     .object({
       companyName: z.string().trim().min(1, validation.companyNameRequired),
-
       email: z.string().trim().email(validation.invalidEmail),
-
       phone: z.string(),
       address: z.string(),
-
       defaultLanguage: z.enum(["en", "de"]),
-
       openingTime: z.string(),
       closingTime: z.string(),
     })
@@ -33,30 +32,14 @@ const createSettingsSchema = (validation: SettingsValidation) =>
       path: ["closingTime"],
     });
 
-export function SettingsPage({ locale }: SettingsPageProps) {
+export function SettingsPage({
+  locale,
+  settings: initialSettings,
+  onUpdateSettings,
+}: SettingsPageProps) {
   const t = translations[locale].settings;
 
-  const [settings, setSettings] = useState(() => {
-    const savedSettings = localStorage.getItem("serviceflow-settings");
-
-    if (savedSettings) {
-      try {
-        return JSON.parse(savedSettings);
-      } catch {
-        // Use default settings below
-      }
-    }
-
-    return {
-      companyName: "ServiceFlow GmbH",
-      email: "info@serviceflow.de",
-      phone: "+49 621 555 0100",
-      address: "Mannheim, Germany",
-      defaultLanguage: locale,
-      openingTime: "08:00",
-      closingTime: "18:00",
-    };
-  });
+  const [settings, setSettings] = useState<Settings>(initialSettings);
   const [isSaved, setIsSaved] = useState(false);
   const [settingsError, setSettingsError] = useState("");
 
@@ -64,7 +47,9 @@ export function SettingsPage({ locale }: SettingsPageProps) {
     const settingsSchema = createSettingsSchema(
       translations[locale].settings.validation,
     );
+
     const result = settingsSchema.safeParse(settings);
+
     if (!result.success) {
       setIsSaved(false);
 
@@ -79,9 +64,9 @@ export function SettingsPage({ locale }: SettingsPageProps) {
       return;
     }
 
-    localStorage.setItem("serviceflow-settings", JSON.stringify(result.data));
-
     setSettings(result.data);
+    onUpdateSettings(result.data);
+
     setSettingsError("");
     setIsSaved(true);
 
@@ -186,11 +171,10 @@ export function SettingsPage({ locale }: SettingsPageProps) {
               onChange={(event) =>
                 setSettings({
                   ...settings,
-                  defaultLanguage: event.target.value,
+                  defaultLanguage: event.target.value as Settings["defaultLanguage"],
                 })
               }
             >
-              {" "}
               <option value="de">{t.preferences.german}</option>
               <option value="en">{t.preferences.english}</option>
             </select>
@@ -216,7 +200,7 @@ export function SettingsPage({ locale }: SettingsPageProps) {
                     openingTime: event.target.value,
                   })
                 }
-              />{" "}
+              />
             </div>
 
             <div className="formField">
@@ -231,7 +215,7 @@ export function SettingsPage({ locale }: SettingsPageProps) {
                     closingTime: event.target.value,
                   })
                 }
-              />{" "}
+              />
             </div>
           </div>
         </section>
@@ -243,12 +227,14 @@ export function SettingsPage({ locale }: SettingsPageProps) {
               {t.saved}
             </span>
           )}
+
           {settingsError && (
             <span className="settingsErrorMessage">
               <span className="settingsErrorIcon">!</span>
               {settingsError}
             </span>
           )}
+
           <button
             type="button"
             className="submitRequestButton"
