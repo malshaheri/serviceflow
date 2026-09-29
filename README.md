@@ -1,32 +1,87 @@
-# React + TypeScript + Vite
+# ServiceFlow
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+ServiceFlow is a modern service management dashboard built with React, TypeScript, and Vite.
 
-Currently, two official plugins are available:
+It simulates the daily workflow of a small service company, including customer management, service requests, scheduling, team management, and company settings.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Dashboard with service request statistics
+- Customer management
+- Service request management
+- Daily schedule view
+- Team member management
+- Company settings
+- English and German interface
+- Search and filtering
+- Form validation with Zod
+- Data fetching and mutations with TanStack Query
+- Local persistence through a mock API layer using localStorage
+- Responsive dashboard layout
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the Oxlint configuration
+- React
+- TypeScript
+- Vite
+- React Router
+- TanStack Query
+- Zod
+- CSS
+- Oxlint
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Architecture
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+ServiceFlow separates UI components from data access through a lightweight API abstraction layer.
+
+Main API modules:
+
+- `serviceRequestsApi.ts`
+- `customersApi.ts`
+- `teamMembersApi.ts`
+- `settingsApi.ts`
+
+TanStack Query handles fetching, caching, mutations, and query invalidation. The current API layer uses `localStorage` to simulate backend persistence while keeping data-access logic outside the page components.
+
+## Pages
+
+- Dashboard
+- Customers
+- Service Requests
+- Schedule
+- Team
+- Settings
+
+## Getting Started
+
+Install dependencies:
+
+```bash
+npm install
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+Run the linter:
+
+```bash
+npm run lint
+```
+
+## Project Status
+
+ServiceFlow is complete as a portfolio project. The app currently uses a mock API layer backed by `localStorage`, making it easy to replace with a real backend later without restructuring the UI.
+
+## Author
+
+Mohammed Alshaheri
