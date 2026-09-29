@@ -97,7 +97,7 @@ export function SchedulePage({ locale, serviceRequests }: SchedulePageProps) {
           onClick={() => changeDay(-1)}
           className="scheduleNavButton"
         >
-          â† {t.previousDay}
+          ← {t.previousDay}{" "}
         </button>
 
         <div className="scheduleDate">
@@ -168,4 +168,3 @@ export function SchedulePage({ locale, serviceRequests }: SchedulePageProps) {
     </section>
   );
 }
-
