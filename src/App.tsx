@@ -1,7 +1,9 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { translations, type Locale } from "./i18n/translations";
 import "./App.css";
 import { NewRequestModal } from "./components/NewRequestModal";
+import type { TeamMemberFormData } from "./components/NewTeamMemberModal";
+import type { TeamMember } from "./data/teamMembers";
 import { services } from "./data/services";
 import { DashboardPage } from "./pages/DashboardPage";
 import { CustomersPage } from "./pages/CustomersPage";
@@ -16,6 +18,12 @@ import {
   getServiceRequests,
 } from "./api/serviceRequestsApi";
 import { createCustomer, getCustomers } from "./api/customersApi";
+import {
+  createTeamMember,
+  deleteTeamMember,
+  getTeamMembers,
+  updateTeamMember,
+} from "./api/teamMembersApi";
 
 function App() {
   const [locale, setLocale] = useState<Locale>(() => {
@@ -56,6 +64,33 @@ function App() {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["customers"],
+      });
+    },
+  });
+
+  const createTeamMemberMutation = useMutation({
+    mutationFn: createTeamMember,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["teamMembers"],
+      });
+    },
+  });
+
+  const updateTeamMemberMutation = useMutation({
+    mutationFn: updateTeamMember,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["teamMembers"],
+      });
+    },
+  });
+
+  const deleteTeamMemberMutation = useMutation({
+    mutationFn: deleteTeamMember,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["teamMembers"],
       });
     },
   });
@@ -107,6 +142,11 @@ function App() {
     queryFn: getCustomers,
   });
 
+  const { data: teamMembers = [] } = useQuery({
+    queryKey: ["teamMembers"],
+    queryFn: getTeamMembers,
+  });
+
   const handleCreateCustomer = (data: {
     name: string;
     email: string;
@@ -127,6 +167,33 @@ function App() {
     };
 
     createCustomerMutation.mutate(newCustomer);
+  };
+
+  const handleCreateTeamMember = (data: TeamMemberFormData) => {
+    const nextId =
+      Math.max(...teamMembers.map((member) => member.id), 200) + 1;
+
+    const newMember: TeamMember = {
+      id: nextId,
+      name: data.name,
+      role: {
+        en: data.roleEn,
+        de: data.roleDe,
+      },
+      email: data.email,
+      phone: data.phone,
+      status: data.status,
+    };
+
+    createTeamMemberMutation.mutate(newMember);
+  };
+
+  const handleUpdateTeamMember = (member: TeamMember) => {
+    updateTeamMemberMutation.mutate(member);
+  };
+
+  const handleDeleteTeamMember = (memberId: number) => {
+    deleteTeamMemberMutation.mutate(memberId);
   };
 
   const t = translations[locale];
@@ -316,7 +383,14 @@ function App() {
             <Route
               path="/team"
               element={
-                <TeamPage locale={locale} serviceRequests={serviceRequests} />
+                <TeamPage
+                  locale={locale}
+                  serviceRequests={serviceRequests}
+                  teamMembers={teamMembers}
+                  onCreateTeamMember={handleCreateTeamMember}
+                  onUpdateTeamMember={handleUpdateTeamMember}
+                  onDeleteTeamMember={handleDeleteTeamMember}
+                />
               }
             />
             <Route
@@ -337,3 +411,9 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+

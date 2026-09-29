@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+﻿import { useState } from "react";
 import {
   NewTeamMemberModal,
   type TeamMemberFormData,
 } from "../components/NewTeamMemberModal";
-import {
-  teamMembers as initialTeamMembers,
-  type TeamMember,
-  type TeamMemberStatus,
+import type {
+  TeamMember,
+  TeamMemberStatus,
 } from "../data/teamMembers";
 import type { ServiceRequest } from "../data/serviceRequests";
 import { translations, type Locale } from "../i18n/translations";
@@ -14,58 +13,29 @@ import { translations, type Locale } from "../i18n/translations";
 type TeamPageProps = {
   locale: Locale;
   serviceRequests: ServiceRequest[];
+  teamMembers: TeamMember[];
+  onCreateTeamMember: (data: TeamMemberFormData) => void;
+  onUpdateTeamMember: (member: TeamMember) => void;
+  onDeleteTeamMember: (memberId: number) => void;
 };
 
-export function TeamPage({ locale, serviceRequests }: TeamPageProps) {
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>(() => {
-    const savedTeamMembers = localStorage.getItem("serviceflow-team-members");
-
-    if (!savedTeamMembers) {
-      return initialTeamMembers;
-    }
-
-    try {
-      return JSON.parse(savedTeamMembers) as TeamMember[];
-    } catch {
-      return initialTeamMembers;
-    }
-  });
+export function TeamPage({
+  locale,
+  serviceRequests,
+  teamMembers,
+  onCreateTeamMember,
+  onUpdateTeamMember,
+  onDeleteTeamMember,
+}: TeamPageProps) {
   const [isNewMemberOpen, setIsNewMemberOpen] = useState(false);
   const [openMenuId, setOpenMenuId] = useState<number | null>(null);
   const [editingMember, setEditingMember] = useState<TeamMember | null>(null);
   const [memberToRemove, setMemberToRemove] = useState<TeamMember | null>(null);
-  useEffect(() => {
-    localStorage.setItem(
-      "serviceflow-team-members",
-      JSON.stringify(teamMembers),
-    );
-  }, [teamMembers]);
 
   const handleSaveTeamMember = (data: TeamMemberFormData) => {
     if (editingMember) {
-      setTeamMembers((currentMembers) =>
-        currentMembers.map((member) =>
-          member.id === editingMember.id
-            ? {
-                ...member,
-                name: data.name,
-                role: {
-                  en: data.roleEn,
-                  de: data.roleDe,
-                },
-                email: data.email,
-                phone: data.phone,
-                status: data.status,
-              }
-            : member,
-        ),
-      );
-    } else {
-      const nextId =
-        Math.max(...teamMembers.map((member) => member.id), 200) + 1;
-
-      const newMember: TeamMember = {
-        id: nextId,
+      const updatedMember: TeamMember = {
+        ...editingMember,
         name: data.name,
         role: {
           en: data.roleEn,
@@ -76,12 +46,15 @@ export function TeamPage({ locale, serviceRequests }: TeamPageProps) {
         status: data.status,
       };
 
-      setTeamMembers((currentMembers) => [...currentMembers, newMember]);
+      onUpdateTeamMember(updatedMember);
+    } else {
+      onCreateTeamMember(data);
     }
 
     setEditingMember(null);
     setIsNewMemberOpen(false);
   };
+
   const t = translations[locale].team;
 
   const getStatusLabel = (status: TeamMemberStatus) => {
@@ -187,6 +160,7 @@ export function TeamPage({ locale, serviceRequests }: TeamPageProps) {
                         >
                           {t.editMember}
                         </button>
+
                         <button
                           type="button"
                           className="teamMenuRemove"
@@ -233,6 +207,7 @@ export function TeamPage({ locale, serviceRequests }: TeamPageProps) {
           );
         })}
       </div>
+
       {memberToRemove && (
         <div className="modalOverlay">
           <div className="modal">
@@ -265,12 +240,7 @@ export function TeamPage({ locale, serviceRequests }: TeamPageProps) {
                 type="button"
                 className="dangerButton"
                 onClick={() => {
-                  setTeamMembers((currentMembers) =>
-                    currentMembers.filter(
-                      (member) => member.id !== memberToRemove.id,
-                    ),
-                  );
-
+                  onDeleteTeamMember(memberToRemove.id);
                   setMemberToRemove(null);
                 }}
               >
@@ -280,6 +250,7 @@ export function TeamPage({ locale, serviceRequests }: TeamPageProps) {
           </div>
         </div>
       )}
+
       <NewTeamMemberModal
         isOpen={isNewMemberOpen}
         onClose={() => setIsNewMemberOpen(false)}
