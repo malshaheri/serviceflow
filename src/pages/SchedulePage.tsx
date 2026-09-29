@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+﻿import { useMemo, useState } from "react";
 import { translations, type Locale } from "../i18n/translations";
 import type {
   ServiceRequest,
@@ -97,7 +97,7 @@ export function SchedulePage({ locale, serviceRequests }: SchedulePageProps) {
           onClick={() => changeDay(-1)}
           className="scheduleNavButton"
         >
-          ← {t.previousDay}
+          â† {t.previousDay}
         </button>
 
         <div className="scheduleDate">
@@ -168,3 +168,4 @@ export function SchedulePage({ locale, serviceRequests }: SchedulePageProps) {
     </section>
   );
 }
+
