@@ -150,6 +150,43 @@ export function ServiceRequestsPage({
             </tbody>
           </table>
         </div>
+        <div className="serviceRequestsMobileList">
+          {filteredRequests.map((request) => (
+            <article className="serviceRequestMobileCard" key={request.id}>
+              <div className="serviceRequestMobileTop">
+                <strong>#{request.id}</strong>
+
+                <span className={`status ${request.status}`}>
+                  {getStatusLabel(request.status)}
+                </span>
+              </div>
+
+              <strong className="serviceRequestMobileCustomer">
+                {request.customer}
+              </strong>
+
+              <span className="serviceRequestMobileService">
+                {locale === "de" ? request.service.de : request.service.en}
+              </span>
+
+              <div className="serviceRequestMobileDetails">
+                <span>
+                  <strong>{t.columns.technician}:</strong>{" "}
+                  {request.technician ?? t.notAssigned}
+                </span>
+
+                <span>
+                  <strong>{t.columns.scheduledFor}:</strong>{" "}
+                  {formatScheduledDate(request.scheduledFor)}
+                </span>
+              </div>
+            </article>
+          ))}
+
+          {filteredRequests.length === 0 && (
+            <div className="serviceRequestMobileEmpty">{t.noResults}</div>
+          )}
+        </div>
       </div>
     </section>
   );

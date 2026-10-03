@@ -2024,3 +2024,72 @@
     font-size: 12px;
   }
 }
+/* Service Requests page - mobile cards */
+
+.serviceRequestsMobileList {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .serviceRequestsPanel .tableWrapper {
+    display: none;
+  }
+
+  .serviceRequestsMobileList {
+    display: grid;
+  }
+
+  .serviceRequestMobileCard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px;
+    border-top: 1px solid #f0f2f5;
+    background: #ffffff;
+  }
+
+  .serviceRequestMobileTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .serviceRequestMobileTop > strong {
+    color: #111827;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .serviceRequestMobileCustomer {
+    color: #111827;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .serviceRequestMobileService {
+    color: #64748b;
+    font-size: 13px;
+  }
+
+  .serviceRequestMobileDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 3px;
+    color: #64748b;
+    font-size: 12px;
+  }
+
+  .serviceRequestMobileDetails strong {
+    color: #475569;
+    font-weight: 600;
+  }
+
+  .serviceRequestMobileEmpty {
+    padding: 28px 18px;
+    color: #7b8495;
+    font-size: 13px;
+    text-align: center;
+  }
+}
