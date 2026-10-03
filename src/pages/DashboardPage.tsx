@@ -116,6 +116,44 @@ export function DashboardPage({ locale, serviceRequests }: DashboardPageProps) {
             </tbody>
           </table>
         </div>
+        <div className="mobileRequestsList">
+          {serviceRequests.slice(0, 4).map((request) => {
+            const statusLabel =
+              request.status === "scheduled"
+                ? t.dashboard.recentRequests.statuses.scheduled
+                : request.status === "in-progress"
+                  ? t.dashboard.recentRequests.statuses.inProgress
+                  : request.status === "completed"
+                    ? t.dashboard.recentRequests.statuses.completed
+                    : t.dashboard.recentRequests.statuses.new;
+
+            const statusClass =
+              request.status === "in-progress" ? "progress" : request.status;
+
+            return (
+              <article className="mobileRequestCard" key={request.id}>
+                <div className="mobileRequestTop">
+                  <strong>#{request.id}</strong>
+
+                  <span className={`status ${statusClass}`}>{statusLabel}</span>
+                </div>
+
+                <strong className="mobileRequestCustomer">
+                  {request.customer}
+                </strong>
+
+                <span className="mobileRequestService">
+                  {request.service[locale]}
+                </span>
+
+                <span className="mobileRequestTechnician">
+                  {t.dashboard.recentRequests.columns.technician}:{" "}
+                  {request.technician ?? "—"}
+                </span>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

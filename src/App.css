@@ -1971,3 +1971,56 @@
   border-radius: 12px;
   object-fit: cover;
 }
+/* Dashboard recent requests - mobile cards */
+
+.mobileRequestsList {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .requestsPanel .tableWrapper {
+    display: none;
+  }
+
+  .mobileRequestsList {
+    display: grid;
+  }
+
+  .mobileRequestCard {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 16px 18px;
+    border-top: 1px solid #f0f2f5;
+    background: #ffffff;
+  }
+
+  .mobileRequestTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .mobileRequestTop > strong {
+    color: #111827;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .mobileRequestCustomer {
+    color: #111827;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .mobileRequestService {
+    color: #64748b;
+    font-size: 13px;
+  }
+
+  .mobileRequestTechnician {
+    color: #64748b;
+    font-size: 12px;
+  }
+}
