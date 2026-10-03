@@ -132,6 +132,40 @@ export function CustomersPage({
             </tbody>
           </table>
         </div>
+        <div className="customersMobileList">
+          {filteredCustomers.map((customer) => (
+            <article className="customerMobileCard" key={customer.id}>
+              <div className="customerMobileTop">
+                <div>
+                  <strong>{customer.name}</strong>
+                  <span>#{customer.id}</span>
+                </div>
+
+                <span className={`status ${customer.status}`}>
+                  {customer.status === "active"
+                    ? t.statuses.active
+                    : t.statuses.inactive}
+                </span>
+              </div>
+
+              <div className="customerMobileContact">
+                <span>{customer.email}</span>
+                <span>{customer.phone}</span>
+              </div>
+
+              <div className="customerMobileDetails">
+                <span>
+                  <strong>{t.columns.city}:</strong> {customer.city}
+                </span>
+
+                <span>
+                  <strong>{t.columns.openRequests}:</strong>{" "}
+                  {customer.openRequests}
+                </span>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
       <NewCustomerModal
         isOpen={isNewCustomerOpen}

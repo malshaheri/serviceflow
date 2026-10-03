@@ -2093,3 +2093,73 @@
     text-align: center;
   }
 }
+/* Customers page - mobile cards */
+
+.customersMobileList {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .customersPanel .tableWrapper {
+    display: none;
+  }
+
+  .customersMobileList {
+    display: grid;
+  }
+
+  .customerMobileCard {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    padding: 18px;
+    border-top: 1px solid #f0f2f5;
+    background: #ffffff;
+  }
+
+  .customerMobileTop {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .customerMobileTop > div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .customerMobileTop > div > strong {
+    color: #111827;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .customerMobileTop > div > span {
+    color: #94a3b8;
+    font-size: 11px;
+  }
+
+  .customerMobileContact {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    color: #64748b;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+  }
+
+  .customerMobileDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: #64748b;
+    font-size: 12px;
+  }
+
+  .customerMobileDetails strong {
+    color: #475569;
+    font-weight: 600;
+  }
+}
