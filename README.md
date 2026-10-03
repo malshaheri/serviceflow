@@ -1,5 +1,7 @@
 # ServiceFlow
 
+[Live Demo](https://serviceflow-sable.vercel.app/) · [Repository](https://github.com/malshaheri/serviceflow)
+
 ServiceFlow is a modern service management dashboard built with React, TypeScript, and Vite.
 
 It simulates the daily workflow of a small service company, including customer management, service requests, scheduling, team management, and company settings.
