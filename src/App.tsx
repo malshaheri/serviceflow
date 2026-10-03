@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { translations, type Locale } from "./i18n/translations";
 import "./App.css";
 import { NewRequestModal } from "./components/NewRequestModal";
@@ -247,7 +247,7 @@ function App() {
     <div className="appShell">
       <aside className="sidebar">
         <div className="brand">
-          <div className="brandMark">SF</div>
+          <div className="brandMark"><img src="/favicon.png" alt="ServiceFlow logo" /></div>
 
           <div>
             <strong>ServiceFlow</strong>
